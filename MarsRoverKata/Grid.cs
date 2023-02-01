@@ -2,11 +2,11 @@ namespace MarsRoverKata;
 
 public class Grid
 {
-    private readonly int _height;
-    private readonly int _width;
+    internal readonly int Height;
+    internal readonly int Width;
     public Grid(int height, int width)
     {
-        _height = height;
-        _width = width; 
+        Height = height;
+        Width = width; 
     }
 }

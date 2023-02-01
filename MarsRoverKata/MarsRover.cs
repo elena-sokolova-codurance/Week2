@@ -2,46 +2,41 @@ namespace MarsRoverKata;
 
 public class MarsRover
 {
-    private readonly Position _position = new();
+    private Position _position;
     private readonly Orientation _orientation = new();
 
-    class Orientation
+    public MarsRover(Grid grid)
     {
-        private const string North = "N";
-        private const string East = "E";
-        private const string South = "S";
-        private const string West = "W";
-
-        internal string Current = North;   
-
-        public void RotateRight()
-        {
-            Current = Current switch
-            {
-                North => East,
-                East => South,
-                South => West,
-                West => North,
-                _ => Current
-            };
-        }
+        _position = new Position(grid);
     }
-
     public string Execute(string command)
     {
         foreach (var singleCommand in command)
         {
-            if (singleCommand.Equals('M'))
-            {
-                _position.MoveUp();
-            } 
-            if (singleCommand.Equals('R'))
-            {
-                _orientation.RotateRight();
-            }
-
+            Execute(singleCommand);
         }
         
         return $"{_position.X}:{_position.Y}:{_orientation.Current}";
+    }
+
+    private void Execute(char singleCommand)
+    {
+        switch (singleCommand)
+        {
+            case 'M':
+                if(_orientation.Current.Equals("S"))
+                    _position.MoveDown();
+                else
+                {
+                    _position.MoveUp();
+                }
+                break;
+            case 'R':
+                _orientation.RotateRight();
+                break;
+            case 'L':
+                _orientation.RotateLeft();
+                break;
+        }
     }
 }
