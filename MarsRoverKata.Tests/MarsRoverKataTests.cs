@@ -5,12 +5,21 @@ public class MarsRoverKataTests
     [Fact]
     public void CheckGridSize()
     {
-        int height = 5;
-        int width = 5;
-        Grid grid = new Grid(height,width);
-        MarsRover marsRover = new MarsRover(grid);
+        var marsRover = new MarsRover(new Grid(5,5));
+        Assert.Equal("5x5", marsRover.GetGridSize());
+    }
 
-        Assert.Equal(marsRover.GetGridSize(), height * width);
-
+    [Fact]
+    public void CheckStartingPosition()
+    {
+        var marsRover = new MarsRover(new Grid(5,5));
+        Assert.Equal("0:0:N", marsRover.Execute(""));
+    }
+    
+    [Fact]
+    public void ExecuteMoveCommand()
+    {
+        var marsRover = new MarsRover(new Grid(5,5));
+        Assert.Equal("0:1:N", marsRover.Execute("M"));
     }
 }

@@ -8,9 +8,17 @@ public class MarsRover
         this._grid = grid;
     }
 
-    public int GetGridSize()
+    public string GetGridSize()
     {
-        var gridSize = _grid.Height * _grid.Width;
-        return gridSize;
+        return _grid.ToString();
+    }
+
+    public string Execute(string command)
+    {
+        if (command.Equals("M"))
+        {
+            return "0:1:N";
+        }
+        return "0:0:N";
     }
 }

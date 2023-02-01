@@ -9,4 +9,9 @@ public class Grid
         this.Height = height;
         this.Width = width; 
     }
+
+    public override string ToString()
+    {
+        return $"{Height}x{Width}";
+    }
 }
