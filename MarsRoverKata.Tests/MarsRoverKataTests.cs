@@ -2,24 +2,34 @@ namespace MarsRoverKata.Tests;
 
 public class MarsRoverKataTests
 {
-    [Fact]
-    public void CheckStartingPosition()
+    private readonly MarsRover _marsRover;
+
+    public MarsRoverKataTests()
     {
-        var marsRover = new MarsRover();
-        Assert.Equal("0:0:N", marsRover.Execute(""));
-    }
-    
-    [Fact]
-    public void ExecuteMoveCommand()
-    {
-        var marsRover = new MarsRover();
-        Assert.Equal("0:1:N", marsRover.Execute("M"));
+        _marsRover = new MarsRover();
     }
 
     [Fact]
-    public void ExecuteMultipleMoveCommands()
+    public void CheckStartingPosition()
     {
-        var marsRover = new MarsRover();
-        Assert.Equal("0:3:N", marsRover.Execute("MMM"));
+        Assert.Equal("0:0:N", _marsRover.Execute(""));
+    }
+
+    [Theory]
+    [InlineData("M", "0:1:N")]
+    [InlineData("MMM", "0:3:N")]
+    // [InlineData("MMMMMM", "0:1:N")]
+    public void ExecuteMoveCommands(string command, string expectedPosition)
+    {
+        Assert.Equal(expectedPosition, _marsRover.Execute(command));
+    }
+
+    [Theory]
+    [InlineData("R", "0:0:E")]
+    [InlineData("RRR", "0:0:W")]
+    [InlineData("RRRRR", "0:0:E")]
+    public void ExecuteRightRotationCommands(string command, string expectedPosition)
+    {
+        Assert.Equal(expectedPosition, _marsRover.Execute(command));
     }
 }
