@@ -2,16 +2,11 @@ namespace MarsRoverKata;
 
 public class Grid
 {
-    internal readonly int Height;
-    internal readonly int Width;
+    private readonly int _height;
+    private readonly int _width;
     public Grid(int height, int width)
     {
-        this.Height = height;
-        this.Width = width; 
-    }
-
-    public override string ToString()
-    {
-        return $"{Height}x{Width}";
+        _height = height;
+        _width = width; 
     }
 }
